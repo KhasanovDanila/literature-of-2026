@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>«На дне» М. Горький | Полный анализ: темы, проблемы, образы</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-light: #fefaf5; --bg-card: #ffffff; --bg-soft: #f5f0ea;
+            --text-primary: #2c2418; --text-secondary: #5c4e3c; --text-muted: #8a7a64;
+            --accent: #9b6a3c; --accent-light: #c18f5b; --accent-dark: #7a4e2a;
+            --border-light: #e6dfd6;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.03); --shadow-md: 0 20px 35px -12px rgba(0,0,0,0.08);
+            --plank-bg: #fdfbf7;
+            --sidebar-width: 280px;
+        }
+        
+        body { 
+            background-color: var(--bg-light); 
+            color: var(--text-primary); 
+            font-family: 'Merriweather', serif; 
+            line-height: 1.55; 
+            overflow-x: hidden; 
+        }
+        
+        h1, h2, h3, h4, h5, h6,
+        .hero__title, .hero__author, .sidebar-title, .section-title, 
+        .block-title, .block-sub, .card-analysis h3, .thematic-card h3,
+        .monologue-card__title, .monologue-card__sub, .law-card h4, .law-subtitle,
+        .monologue-speaker, .edge-title, .hero-name, .hero-role,
+        .nav-label, .carousel-item__name, .speaker-badge, .year-badge,
+        .truth-table th, .hero-table th {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .speech-text, .truth-table td, .monologue-text, .hero-quote, .speech,
+        .quote-deep, .edge-dialogue .speech, .speaker-name,
+        .monologue-text p, .speech-block .speech-text,
+        .key-phrase, .highlight-word {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+        
+        .card-analysis p, .thematic-card p, .comment-light,
+        .comment-text, .info-block p, .analysis-text, footer, 
+        .video-monologue-grid p, .info-modal p {
+            font-family: 'Merriweather', serif;
+        }
+        
+        .main-layout {
+            display: flex;
+            gap: 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 0 50px;
+            position: relative;
+            z-index: 5;
+        }
+        .sidebar {
+            position: sticky;
+            top: 30px;
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+            height: fit-content;
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 24px 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(2px);
+        }
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent-light);
+            text-align: center;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            padding: 6px 8px;
+            border-radius: 40px;
+            position: relative;
+            border: 1px solid transparent;
+        }
+        .nav-item:hover {
+            background: rgba(193,143,91,0.08);
+            transform: translateX(4px);
+            border-color: var(--border-light);
+        }
+        .nav-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-soft);
+            border: 2px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            flex-shrink: 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .nav-item.active .nav-dot {
+            background: var(--accent-light);
+            border-color: var(--accent);
+            color: white;
+            box-shadow: 0 0 0 4px rgba(193,143,91,0.25);
+            transform: scale(1.05);
+        }
+        .nav-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1.3;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+        .nav-item.active .nav-label {
+            color: var(--accent-dark);
+            font-weight: 600;
+        }
+        .content {
+            flex: 1;
+            min-width: 0;
+        }
+        .pattern-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.2; background-image: radial-gradient(circle at 20% 30%, rgba(155,106,60,0.1) 2%, transparent 2.5%); background-size: 40px 40px; z-index: 0; }
+        .hero { text-align: center; padding: 50px 20px 30px; border-bottom: 2px solid rgba(193,143,91,0.25); margin-bottom: 30px; }
+        .hero__title { font-size: clamp(3.2rem, 8vw, 5rem); font-weight: 700; color: #2b2118; }
+        .hero__author { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-top: 8px; }
+        .hero__meta { display: inline-block; margin-top: 20px; background: rgba(193,143,91,0.08); padding: 6px 22px; border-radius: 60px; font-size: 0.7rem; color: var(--accent); border: 1px solid var(--accent-light); font-family: 'Montserrat', sans-serif; font-weight: 500; }
+        
+        .carousel-container { display: flex; flex-direction: column; align-items: center; margin: 30px 0 50px; }
+        .carousel-scene { perspective: 1300px; perspective-origin: 50% 40%; width: 100%; max-width: 800px; height: 440px; position: relative; cursor: grab; user-select: none; margin: 0 auto; }
+        .carousel-rotator { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; transition: transform 0.7s ease; }
+        .carousel-item { position: absolute; top: 50%; left: 50%; width: 150px; height: 210px; margin-top: -105px; margin-left: -75px; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); background: white; cursor: default; transition: box-shadow 0.2s, border-color 0.2s; }
+        .carousel-item:hover { box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15); border-color: var(--accent-light); }
+        .carousel-item__inner { width: 100%; height: 100%; background-size: cover; background-position: center; position: relative; display: flex; align-items: flex-end; justify-content: center; background-color: #ede5db; }
+        .carousel-item__name { background: rgba(255,255,245,0.85); backdrop-filter: blur(6px); padding: 5px 12px; border-radius: 40px; font-weight: 700; margin-bottom: 16px; font-family: 'Playfair Display', serif; color: #3e2c1c; }
+        .carousel-controls { display: flex; gap: 24px; margin-top: 30px; justify-content: center; }
+        .carousel-btn { background: white; border: 1px solid var(--border-light); width: 48px; height: 48px; border-radius: 60px; font-size: 1.2rem; cursor: pointer; transition: 0.2s; color: var(--accent); }
+        .carousel-btn:hover { background: var(--accent-light); color: white; border-color: var(--accent-light); }
+        .carousel-btn--pause { width: auto; padding: 0 24px; display: inline-flex; align-items: center; gap: 8px; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+        
+        .monologue-video-section {
+            background: var(--bg-card);
+            border-radius: 40px;
+            padding: 32px;
+            margin: 60px 0;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+        .section-header { margin-bottom: 28px; }
+        .section-title { font-size: 1.8rem; border-left: 4px solid var(--accent-light); padding-left: 20px; color: var(--text-primary); }
+        .video-monologue-grid { display: flex; flex-wrap: wrap; gap: 32px; }
+        .video-column { flex: 1.2; min-width: 260px; }
+        .video-wrapper { position: relative; background: #0a0a0a; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-sm); aspect-ratio: 16 / 9; }
+        .video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .monologue-column { flex: 1; min-width: 280px; background: var(--bg-soft); border-radius: 32px; padding: 24px; }
+        .monologue-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 1.7;
+            color: #2c2418;
+            background: linear-gradient(145deg, #ffffff, #fefaf5);
+            padding: 32px;
+            border-radius: 32px;
+            box-shadow: 0 12px 28px -8px rgba(0,0,0,0.1);
+            position: relative;
+            letter-spacing: 0.01em;
+        }
+        .monologue-text::before { content: "«"; font-size: 6rem; font-family: 'Playfair Display', serif; color: var(--accent-light); opacity: 0.3; position: absolute; top: -10px; left: 15px; }
+        .monologue-text::after { content: "»"; font-size: 6rem; font-family: 'Playfair Display', serif; color: var(--accent-light); opacity: 0.3; position: absolute; bottom: -40px; right: 20px; }
+        .monologue-speaker { font-weight: 700; font-size: 1.5rem; color: var(--accent); margin-bottom: 18px; border-left: 3px solid var(--accent-light); padding-left: 16px; text-transform: uppercase; }
+        .highlight-word { font-weight: 700; color: #b8863f; font-size: 1.15em; letter-spacing: 0.02em; }
+        
+        .thematics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+            margin: 30px 0 0;
+        }
+        .thematic-card {
+            background: var(--bg-soft);
+            border-radius: 28px;
+            padding: 28px 24px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+        .thematic-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-light);
+        }
+        .thematic-icon {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        .thematic-card h3 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 14px;
+            border-left: 3px solid var(--accent-light);
+            padding-left: 16px;
+        }
+        .thematic-card p {
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .info-block { background: var(--bg-card); border-radius: 32px; padding: 32px 28px; margin: 40px 0; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); scroll-margin-top: 90px; }
+        .block-title { font-size: 1.8rem; margin-bottom: 24px; border-left: 4px solid var(--accent-light); padding-left: 20px; }
+        .block-sub { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+        .grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; margin: 30px 0; }
+        .card-analysis { background: var(--bg-soft); border-radius: 24px; padding: 24px; transition: transform 0.2s; }
+        .card-analysis:hover { transform: translateY(-4px); }
+        .card-analysis h3 { color: var(--accent); font-size: 1.3rem; margin-bottom: 12px; }
+        .quote-deep { font-style: italic; border-left: 3px solid var(--accent-light); padding-left: 20px; margin: 20px 0; color: #7a6233; font-size: 1.2rem; font-weight: 500; letter-spacing: 0.01em; }
+        
+        .hero-table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 24px; overflow: hidden; margin-top: 20px; }
+        .hero-table th, .hero-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--border-light); font-family: 'Merriweather', serif; }
+        .hero-table th { background: var(--bg-soft); color: var(--accent); font-weight: 600; }
+        
+        .truth-table-wrapper {
+            width: 100%;
+            margin: 20px 0 0 0;
+        }
+        .truth-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+        .truth-table th {
+            background: var(--bg-soft);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--accent);
+            padding: 20px 16px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-light);
+        }
+        .truth-table td {
+            padding: 18px 16px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.6;
+            font-style: normal;
+            background-color: var(--bg-card);
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+        .truth-table tr:last-child td { border-bottom: none; }
+        .truth-table td:first-child, .truth-table th:first-child { border-right: 1px solid var(--border-light); }
+        .truth-table td:last-child, .truth-table th:last-child { border-left: 1px solid var(--border-light); }
+        
+        .monologue-card {
+            background: var(--plank-bg);
+            border-radius: 32px;
+            padding: 0;
+            margin: 32px 0 24px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: 0.25s;
+            overflow: hidden;
+            scroll-margin-top: 90px;
+        }
+        .monologue-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .monologue-card__header {
+            background: linear-gradient(135deg, rgba(193,143,91,0.08), rgba(193,143,91,0.02));
+            padding: 20px 28px 12px 28px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .monologue-card__title {
+            font-size: 1.7rem;
+            color: var(--accent-dark);
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .monologue-card__title span { font-size: 2rem; }
+        .monologue-card__sub {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent-light);
+            margin-top: 8px;
+        }
+        .monologue-card__body {
+            padding: 24px 28px 28px 28px;
+        }
+        .speech-block {
+            margin-bottom: 28px;
+            position: relative;
+        }
+        .speech-block:last-child { margin-bottom: 0; }
+        .speaker-badge {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            background: rgba(193,143,91,0.12);
+            padding: 4px 14px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+        }
+        .speech-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            font-weight: 500;
+            color: var(--text-primary);
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-light);
+            margin: 8px 0 12px 0;
+            letter-spacing: 0.01em;
+        }
+        .speech-text strong, .speech-text em { color: var(--accent-dark); font-weight: 700; }
+        .key-phrase {
+            font-weight: 700;
+            color: #b0783a;
+            background: linear-gradient(120deg, rgba(193,143,91,0.1) 0%, rgba(193,143,91,0) 80%);
+            padding: 0 6px;
+            border-radius: 4px;
+            font-size: 1.05em;
+        }
+        
+        .laws-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            margin-top: 10px;
+        }
+        .laws-table thead th {
+            background: var(--bg-soft);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            padding: 18px 16px 8px 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+            width: 33.33%;
+        }
+        .laws-subtitle-row td {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-light);
+            font-weight: 600;
+            padding: 4px 16px 16px 16px;
+            text-align: center;
+            background: var(--bg-soft);
+            border-bottom: 2px solid var(--accent-light);
+        }
+        .laws-table tbody td {
+            padding: 20px 16px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border-light);
+            background-color: var(--bg-card);
+            width: 33.33%;
+        }
+        .laws-table tbody tr:last-child td { border-bottom: none; }
+        .laws-table td:not(:last-child), .laws-table th:not(:last-child) { border-right: 1px solid var(--border-light); }
+        .laws-quote {
+            background: var(--plank-bg);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--accent-light);
+        }
+        .laws-quote--highlight { background: rgba(193,143,91,0.08); border-left-color: var(--accent); }
+        .laws-quote__text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.55;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+        .laws-quote__author {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-align: right;
+        }
+        .laws-explain {
+            font-family: 'Merriweather', serif;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .info-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            backdrop-filter: blur(5px);
+        }
+        .info-modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .info-modal {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-light);
+            max-width: 450px;
+            width: 85%;
+            padding: 35px 25px;
+            text-align: center;
+            border-radius: 24px;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .info-modal-overlay.active .info-modal { transform: scale(1); }
+        .info-modal hr { margin: 16px 0; border-top: 1px solid var(--border-light); }
+        .info-modal button { background: white; border: 1px solid var(--accent-light); color: var(--accent); padding: 8px 26px; margin-top: 14px; border-radius: 40px; cursor: pointer; transition: 0.2s; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+        .info-modal button:hover { background: var(--accent-light); color: white; }
+        footer { text-align: center; padding: 40px 0; color: var(--text-muted); border-top: 1px solid var(--border-light); margin-top: 20px; font-size: 0.9rem; }
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            padding: 8px 22px;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-family: 'Playfair Display', serif;
+        }
+        @media (max-width: 650px) {
+            .thematics-grid { grid-template-columns: 1fr; }
+            .carousel-scene { height: 340px; }
+            .carousel-item { width: 110px; height: 155px; margin-top: -77px; margin-left: -55px; }
+        }
+        @media (max-width: 900px) {
+            .main-layout { flex-direction: column; padding: 0 24px; }
+            .sidebar { position: relative; top: 0; width: 100%; margin-bottom: 20px; }
+            .sidebar-nav { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; }
+            .nav-item { flex-direction: column; text-align: center; gap: 6px; padding: 8px; min-width: 70px; }
+            .nav-label { font-size: 0.7rem; }
+            .nav-dot { width: 28px; height: 28px; font-size: 0.7rem; }
+        }
+        @media (max-width: 768px) {
+            .laws-table { display: block; overflow-x: auto; }
+            .video-monologue-grid { flex-direction: column; }
+            .monologue-text { font-size: 1.1rem; }
+        }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+<div class="pattern-bg"></div>
+<div class="main-layout">
+    <aside class="sidebar">
+        <div class="sidebar-title">Содержание</div>
+        <nav class="sidebar-nav" id="sidebarNav">
+            <div class="nav-item active" data-target="hero"><div class="nav-dot">1</div><span class="nav-label">Вступление</span></div>
+            <div class="nav-item" data-target="thematics"><div class="nav-dot">2</div><span class="nav-label">Тематика</span></div>
+            <div class="nav-item" data-target="analysis"><div class="nav-dot">3</div><span class="nav-label">Анализ</span></div>
+            <div class="nav-item" data-target="truths"><div class="nav-dot">4</div><span class="nav-label">Три правды</span></div>
+            <div class="nav-item" data-target="heroes"><div class="nav-dot">5</div><span class="nav-label">Герои</span></div>
+            <div class="nav-item" data-target="laws"><div class="nav-dot">6</div><span class="nav-label">Законы</span></div>
+            <div class="nav-item" data-target="for-better"><div class="nav-dot">7</div><span class="nav-label">Для лучшего</span></div>
+            <div class="nav-item" data-target="baron-confession"><div class="nav-dot">8</div><span class="nav-label">Исповедь</span></div>
+            <div class="nav-item" data-target="hymn"><div class="nav-dot">9</div><span class="nav-label">Гимн Человеку</span></div>
+        </nav>
+    </aside>
+
+    <div class="content">
+        <div class="hero" id="hero">
+            <h1 class="hero__title">На дне</h1>
+            <p class="hero__author">Максим Горький</p>
+            <div class="hero__meta">Драма • 1902 • МХТ</div>
+        </div>
+
+        <div class="monologue-video-section">
+            <div class="section-header"><div class="section-title">Отрывок из произведения</div></div>
+            <div class="video-monologue-grid">
+                <div class="video-column">
+                    <div class="video-wrapper">
+                        <video id="satinVideo" controls preload="metadata">
+                            <source src="video/monolog_satin.mp4" type="video/mp4">
+                            <p>Ваш браузер не поддерживает видео.</p>
+                        </video>
+                    </div>
+                    <p style="margin-top: 12px; font-size: 0.7rem; color: var(--text-muted); text-align: center;">🎭 Монолог Сатина (фильм-спектакль 1972)</p>
+                </div>
+                <div class="monologue-column">
+                    <h3 style="font-family: 'Playfair Display'; margin-bottom: 12px; color: var(--accent);">🎙️ Гимн Человеку</h3>
+                    <div class="monologue-text">
+                        <div class="monologue-speaker">Сатин</div>
+                        <p><span class="highlight-word">Чело-век!</span> Это — великолепно! Это звучит... <span class="highlight-word">гордо!</span></p>
+                        <p>Надо <span class="highlight-word">уважать</span> человека! Не жалеть... не унижать его жалостью... <span class="highlight-word">уважать</span> надо!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-block" id="thematics">
+            <div class="block-sub">Глубокий анализ драмы</div>
+            <div class="block-title">📖 Тематика и проблематика пьесы</div>
+            <div class="thematics-grid">
+                <div class="thematic-card"><div class="thematic-icon">🏚️</div><h3>Социальное «дно»</h3><p>Ночлежка Костылева — мир отверженных, потерявших жильё, работу, имя. «Дно» не только социально, но и нравственно.</p></div>
+                <div class="thematic-card"><div class="thematic-icon">🙏</div><h3>Вера и безверие</h3><p>Анна, Актёр, Настя, Пепел — каждый во что-то верит. Лука даёт надежду, но после его ухода надежда исчезает.</p></div>
+                <div class="thematic-card"><div class="thematic-icon">🔮</div><h3>Правда и ложь</h3><p>Что спасает человека — суровая правда или утешительная ложь? </p></div>
+               <div class="thematic-card"><div class="thematic-icon">❓</div><h3>Жалость или равнодушие?</h3><p>Лука жалеет и утешает, Бубнов циничен. Лука дарит надежду (пусть и ложную), правда Бубнова лишает надежды.</p></div>
+            </div>
+        </div>
+
+        <div class="info-block" id="analysis">
+            <div class="block-title">📖 Анализ пьесы «На дне»</div>
+            <div class="thematics-grid">
+                <div class="thematic-card"><h3>🏚️ Социальная проблематика</h3><p>Горький изображает нищих, воров, алкоголиков, бывших аристократов — всех объединяет жизнь в нищете и отчаянии.</p></div>
+                <div class="thematic-card"><h3>⚖️ Обличение несправедливости</h3><p>Автор показывает, как социальные условия влияют на судьбы людей, лишая их надежды. Персонажи — жертвы общественного устройства.</p></div>
+                <div class="thematic-card"><h3>🔮 Спор о правде и лжи</h3><p>Лука проповедует «утешительную ложь», Сатин утверждает, что правда, какой бы горькой она ни была, важнее лжи.</p></div>
+                <div class="thematic-card"><h3>💔 Финал и символизм</h3><p>Смерть Актёра становится символом крушения надежд. Финал открытый, подчёркивающий безысходность.</p></div>
+            </div>
+        </div>
+
+        <div class="info-block" id="truths">
+            <div class="block-title">⚡ Три правды в пьесе</div>
+            <div class="grid-2col">
+                <div class="card-analysis"><h3>Лука (правда сострадания)</h3><p>Дарит надежду, утешает. Его ложь во спасение временно облегчает страдания.</p></div>
+                <div class="card-analysis"><h3>Бубнов (правда факта)</h3><p>Абсолютная честность и непримиримость с ложью. Человек должен говорить только факты.</p></div>
+                <div class="card-analysis"><h3>Сатин (правда — Человек)</h3><p>«Человек — это звучит гордо!» Правда в свободе личности. Уважение выше жалости.</p></div>
+            </div>
+            <div class="truth-table-wrapper">
+                <table class="truth-table"><thead><tr><th>Лука</th><th>Бубнов</th><th>Сатин</th></tr></thead>
+                <tbody><tr><td>«Потому-то всякого человека и уважать надо»</td><td>«А я вот… не умею врать!»</td><td>«Человек – вот правда!»</td></tr>
+                <tr><td>«Любить – живых надо… живых»</td><td>«По-моему — вали всю правду, как она есть!»</td><td>«Ложь – религия рабов и хозяев! Правда – бог свободного человека!»</td></tr>
+                <tr><td>«Человека приласкать – никогда не вредно»</td><td>—</td><td>«Чело-век! Это — великолепно! Это звучит… гордо!»</td></tr></tbody></table>
+            </div>
+        </div>
+
+        <div class="info-block" id="heroes">
+            <div class="block-title">🎭 Система образов: главные герои</div>
+            <table class="hero-table" id="fullCastTable"><thead><tr><th>Персонаж</th><th>Характеристика</th></tr></thead><tbody></tbody></table>
+        </div>
+
+        <div class="info-block" id="laws">
+            <div class="block-title">📜 Законы в пьесе</div>
+            <table class="laws-table"><thead><tr><th>Нравственный закон</th><th>Юридический закон</th><th>Исторический закон</th></tr><tr class="laws-subtitle-row"><td>внутренний ориентир</td><td>кодексы и наказания</td><td>эволюция норм</td></tr></thead>
+            <tbody><tr><td><div class="laws-quote"><div class="laws-quote__text">«Старик хорош был… закон душе имел!»</div><div class="laws-quote__author">— Татарин</div></div><p class="laws-explain">Нравственный закон — внутреннее качество человека, его моральный ориентир.</p></td>
+            <td><div class="laws-quote"><div class="laws-quote__text">«Уложение о наказаниях уголовных и исправительных»</div><div class="laws-quote__author">— Сатин</div></div><p class="laws-explain">Сатин сводит разговор о нравственности к юридическому кодексу.</p></td>
+            <td><div class="laws-quote"><div class="laws-quote__text">«Всякое время даёт свой закон…»</div><div class="laws-quote__author">— Татарин</div></div><p class="laws-explain">Законы эволюционируют, но их этическая основа постоянна.</p></td></tr>
+            <tr><td><div class="laws-quote laws-quote--highlight"><div class="laws-quote__text">«Не обижай человека — вот закон!»</div><div class="laws-quote__author">— Татарин</div></div><p class="laws-explain">Универсальный этический принцип.</p></td>
+            <td><div class="laws-quote"><div class="laws-quote__text">«Устав о наказаниях, налагаемых мировыми судьями»</div><div class="laws-quote__author">— Барон</div></div><p class="laws-explain">Бюрократизация морали.</p></td><td></td></tr></tbody></table>
+        </div>
+
+        <div class="monologue-card" id="for-better">
+            <div class="monologue-card__header"><div class="monologue-card__title"><span>🌟</span> «Для лучшего люди живут»</div><div class="monologue-card__sub">ЗАВЕТ ЛУКИ</div></div>
+            <div class="monologue-card__body"><div class="speech-block"><div class="speaker-badge">Сатин</div><div class="speech-text">«Лука ответил, что люди живут <strong class="key-phrase">„для лучшего“</strong>. Все живут для того, чтобы когда-нибудь появился <strong>„лучший человек“</strong>.»</div></div></div>
+        </div>
+
+        <div class="monologue-card" id="baron-confession">
+            <div class="monologue-card__header"><div class="monologue-card__title"><span>🎩</span> «В карете прошлого — никуда не уедешь»</div><div class="monologue-card__sub">ИСПОВЕДЬ БАРОНА</div></div>
+            <div class="monologue-card__body"><div class="speech-block"><div class="speaker-badge">Барон</div><div class="speech-text">«Я всю жизнь только <strong>переодевался</strong>... Учился — носил мундир... женился — одел фрак... разорился — серый пиджак... И всё... <strong class="key-phrase">как во сне...</strong>»</div></div></div>
+        </div>
+
+        <div class="monologue-card" id="hymn">
+            <div class="monologue-card__header"><div class="monologue-card__title"><span>🏛️</span> Гимн Человеку</div><div class="monologue-card__sub">САТИН · IV АКТ</div></div>
+            <div class="monologue-card__body"><div class="speech-block"><div class="speaker-badge">Сатин</div><div class="speech-text">«Человек — <strong class="key-phrase">свободен</strong>... он за всё платит сам, и потому он — <strong>свободен!</strong> <strong class="key-phrase">Чело-век! Это — великолепно! Это звучит... гордо!</strong>»</div></div></div>
+        </div>
+
+        <footer>Хасанов Данила Ильдарович, 1ИС2 · 2026</footer>
+    </div>
+</div>
+
+<div class="info-modal-overlay" id="infoModal"><div class="info-modal"><p>Хасанов Данила Ильдарович<br>студент 1ИС2<br>для экзамена по литературе</p><hr><p style="font-size:0.9rem;">Режиссёры фильма (отрывка): Галина Волчек, Леонид Пчёлкин</p><hr><div class="year-badge">2026</div><br><button id="closeInfoModal">Закрыть</button></div></div>
+
+<script>
+    (function() {
+        const heroesData = [
+            { id: 'luka', name: 'Лука', role: 'Странник', desc: 'Утешитель, носитель идеи «лжи во спасение».', quote: '«Во что веришь, то и есть»' },
+            { id: 'satin', name: 'Сатин', role: 'Шулер / философ', desc: 'Бывший телеграфист. Произносит гимн Человеку.', quote: '«Человек — это звучит гордо!»' },
+            { id: 'baron', name: 'Барон', role: 'Бывший дворянин', desc: 'Потерял всё: состояние, имя, человеческий облик.', quote: '«Ведь я — барон...»' },
+            { id: 'akter', name: 'Актёр', role: 'Актёр', desc: 'Спился, потерял талант.', quote: '«Таланта нет...»' },
+            { id: 'nastya', name: 'Настя', role: 'Мечтательница', desc: 'Живёт в мире бульварных романов.', quote: '«Молчите... несчастные!»' },
+            { id: 'pepel', name: 'Васька Пепел', role: 'Вор', desc: 'Хочет вырваться и начать новую жизнь.', quote: '«Надо так жить... чтобы самому себя уважать...»' },
+            { id: 'klesch', name: 'Клещ', role: 'Слесарь', desc: 'Потерял инструменты, озлоблен.', quote: '«Работы нет...»' },
+            { id: 'anna', name: 'Анна', role: 'Умирающая', desc: 'Всю жизнь терпела побои.', quote: '«Всю жизнь мою дрожала я...»' },
+            { id: 'bubnov', name: 'Бубнов', role: 'Картузник', desc: 'Циник. Правда — голый факт.', quote: '«Все люди на земле — лишние...»' },
+            { id: 'kostylev', name: 'Костылев', role: 'Хозяин', desc: 'Старик.', quote: '«Доброта сердца...»' },
+            { id: 'vasilisa', name: 'Василиса', role: 'Жена', desc: 'Жестокая, подстрекает к убийству.', quote: '«От судьбы — не уйдешь...»' },
+            { id: 'natasha', name: 'Наташа', role: 'Сестра', desc: 'Добрая, мечтательная.', quote: '«Я — тоже... мечтаю...»' },
+            { id: 'medvedev', name: 'Медведев', role: 'Полицейский', desc: 'Бессильный страж порядка.', quote: '«Порядок должен быть...»' },
+            { id: 'aleshka', name: 'Алёшка', role: 'Сапожник', desc: 'Вечно пьяный.', quote: '«Ничего не хочу!»' }
+        ];
+        const tbody = document.querySelector('#fullCastTable tbody');
+        if(tbody) heroesData.forEach(hero => { let row = tbody.insertRow(); row.innerHTML = `<td><strong>${hero.name}</strong> (${hero.role})</td><td>${hero.desc}</td>`; });
+
+
+        // Навигация
+        const sections = [
+            { id: 'hero', navIndex:0 }, { id: 'thematics', navIndex:1 }, { id: 'analysis', navIndex:2 }, { id: 'truths', navIndex:3 },
+            { id: 'heroes', navIndex:4 }, { id: 'laws', navIndex:5 }, { id: 'for-better', navIndex:6 }, { id: 'baron-confession', navIndex:7 },
+            { id: 'hymn', navIndex:8 }, { id: 'value', navIndex:9 }
+        ];
+        const navItems = document.querySelectorAll('.nav-item');
+        let activeIndex = 0;
+        function updateActiveSection() {
+            let scrollPos = window.scrollY + 120;
+            let newIdx = sections.findIndex(s => { let el = document.getElementById(s.id); return el && scrollPos >= el.offsetTop && scrollPos < el.offsetTop + el.offsetHeight; });
+            if(newIdx === -1 && window.scrollY + window.innerHeight >= document.body.scrollHeight - 100) newIdx = sections.length-1;
+            if(newIdx !== -1 && newIdx !== activeIndex) { activeIndex = newIdx; navItems.forEach((item,idx) => item.classList.toggle('active', idx === activeIndex)); }
+        }
+        window.addEventListener('scroll', () => requestAnimationFrame(updateActiveSection));
+        navItems.forEach((item,idx) => item.addEventListener('click', (e) => {
+            e.preventDefault(); let target = document.getElementById(sections.find(s=>s.navIndex===idx).id);
+            if(target) { window.scrollTo({ top: target.offsetTop - 90, behavior: 'smooth' }); navItems.forEach(n=>n.classList.remove('active')); item.classList.add('active'); activeIndex=idx; }
+        }));
+        setTimeout(updateActiveSection, 100);
+        
+        // Модальное окно
+        let modal = document.getElementById('infoModal'), closeModal = document.getElementById('closeInfoModal');
+        setTimeout(() => modal.classList.add('active'), 400);
+        closeModal.onclick = () => modal.classList.remove('active');
+        modal.addEventListener('click', e => { if(e.target === modal) modal.classList.remove('active'); });
+        
+        // Видео (preload)
+        const video = document.getElementById('satinVideo');
+        if(video) video.load();
+    })();
+</script>
+</body>
+</html>

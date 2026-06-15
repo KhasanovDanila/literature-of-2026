@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Максим Горький | Жизнь и творчество писателя</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital@0;1&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-light: #fefaf5; --bg-card: #ffffff; --bg-soft: #f5f0ea;
+            --text-primary: #2c2418; --text-secondary: #5c4e3c; --text-muted: #8a7a64;
+            --accent: #9b6a3c; --accent-light: #c18f5b; --accent-dark: #7a4e2a;
+            --border-light: #e6dfd6;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.03); --shadow-md: 0 20px 35px -12px rgba(0,0,0,0.08);
+            --plank-bg: #fdfbf7;
+        }
+        body { background-color: var(--bg-light); color: var(--text-primary); font-family: 'Inter', sans-serif; line-height: 1.55; overflow-x: hidden; }
+        .pattern-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.2; background-image: radial-gradient(circle at 20% 30%, rgba(155,106,60,0.1) 2%, transparent 2.5%); background-size: 40px 40px; z-index: 0; }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            border-bottom: 2px solid rgba(193,143,91,0.25);
+            margin-bottom: 50px;
+        }
+        .header__title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            color: #2b2118;
+            letter-spacing: -0.02em;
+        }
+        .header__subtitle {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-top: 12px;
+        }
+        .header__years {
+            display: inline-block;
+            margin-top: 20px;
+            background: rgba(193,143,91,0.08);
+            padding: 6px 22px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            border: 1px solid var(--accent-light);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 40px;
+        }
+        .transition-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(155,106,60,0.3);
+            border: 1px solid var(--accent-light);
+            cursor: pointer;
+        }
+        .transition-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(155,106,60,0.4);
+        }
+        .transition-btn:active {
+            transform: translateY(0);
+        }
+        
+       .bio-section {
+    display: flex;
+    gap: 48px;
+    background: var(--bg-card);
+    border-radius: 40px;
+    padding: 40px;
+    margin: 30px 0 50px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-light);
+    flex-wrap: wrap;
+    align-items: stretch;  
+}
+
+    .bio-photo {
+        flex-shrink: 0;
+        width: 280px;
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-light);
+        background: #e8e0d6;
+        display: flex;
+    }
+
+    .bio-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .bio-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;  
+    }
+        .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px dashed var(--border-light);
+            color: var(--accent);
+        }
+        @media (max-width: 800px) {
+            .bio-section { flex-direction: column; align-items: center; text-align: center; }
+            .bio-photo { width: 220px; }
+            .signature { text-align: center; }
+        }
+        
+        .works-section {
+            margin: 60px 0;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 32px;
+            border-left: 4px solid var(--accent-light);
+            padding-left: 20px;
+            color: var(--text-primary);
+        }
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        .work-card {
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 28px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        .work-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-light);
+        }
+        .work-year {
+            display: inline-block;
+            font-size: 0.7rem;
+            background: var(--bg-soft);
+            padding: 4px 12px;
+            border-radius: 40px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .work-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent-dark);
+            margin-bottom: 12px;
+        }
+        .work-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .quotes-section {
+            background: var(--bg-soft);
+            border-radius: 40px;
+            padding: 50px 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        .quotes-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent-dark);
+            margin-bottom: 30px;
+        }
+        .quote-card {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 28px;
+            background: var(--bg-card);
+            border-radius: 32px;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--accent-light);
+        }
+        .quote-text {
+            font-family: 'Merriweather', serif;
+            font-size: 1.2rem;
+            line-height: 1.65;
+            font-style: italic;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        .quote-author {
+            font-size: 0.85rem;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+        
+        .timeline-section {
+            margin: 60px 0;
+        }
+        .timeline-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 24px;
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid var(--border-light);
+            transition: 0.2s;
+        }
+        .timeline-item:hover {
+            transform: translateX(6px);
+            border-color: var(--accent-light);
+        }
+        .timeline-year {
+            flex-shrink: 0;
+            width: 100px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .timeline-content {
+            flex: 1;
+        }
+        .timeline-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--accent-dark);
+        }
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        @media (max-width: 600px) {
+            .timeline-item { flex-direction: column; gap: 12px; }
+            .timeline-year { width: auto; }
+        }
+        
+        .info-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            backdrop-filter: blur(5px);
+        }
+        .info-modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .info-modal {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-light);
+            max-width: 450px;
+            width: 85%;
+            padding: 35px 25px;
+            text-align: center;
+            border-radius: 24px;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .info-modal-overlay.active .info-modal { transform: scale(1); }
+        .info-modal hr { margin: 16px 0; border-top: 1px solid var(--border-light); }
+        .info-modal button { background: white; border: 1px solid var(--accent-light); color: var(--accent); padding: 8px 26px; margin-top: 14px; border-radius: 40px; cursor: pointer; transition: 0.2s; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+        .info-modal button:hover { background: var(--accent-light); color: white; }
+
+        .legacy-section {
+            background: var(--bg-card);
+            border-radius: 40px;
+            padding: 40px;
+            margin: 50px 0;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+        }
+        .legacy-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent-dark);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-light);
+            padding-left: 20px;
+        }
+        .legacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+        .legacy-item {
+            background: var(--bg-soft);
+            border-radius: 24px;
+            padding: 24px;
+            text-align: center;
+        }
+        .legacy-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+        .legacy-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .legacy-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-light);
+            margin-top: 40px;
+        }
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            padding: 8px 22px;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-family: 'Playfair Display', serif;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 700px) {
+            .container { padding: 0 16px; }
+            .bio-section { padding: 24px; }
+            .quotes-section { padding: 30px 20px; }
+            .quote-text { font-size: 1rem; }
+            .works-grid { gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+<div class="pattern-bg"></div>
+<div class="container">
+    <div class="header">
+        <h1 class="header__title">Максим Горький</h1>
+        <div class="header__subtitle">Певец буревестника и человеческого духа</div>
+        <div class="header__years">1868 — 1936</div>
+    </div>
+    
+    <!-- Кнопка перехода -->
+    <div class="nav-buttons">
+        <a href="pages/main.html" class="transition-btn">
+            <span>🎭</span> Перейти к анализу пьесы «На дне»
+            <span>→</span>
+        </a>
+    </div>
+    
+    <!-- Биография -->
+    <div class="bio-section">
+        <div class="bio-photo">
+         <img src='https://avatars.mds.yandex.net/get-entity_search/11005370/1265430225/S600xU_2x' alt="Максим Горький">
+        </div>
+        <div class="bio-text">
+            <h2>Максим Горький</h2>
+            <p> (настоящее имя — Алексей Максимович Пешков) — русский писатель, прозаик, драматург, публицист. </p>
+            <p>Родился в Нижнем Новгороде в семье столяра. 16  марта 1868, Нижний Новгород, Российская империя — 18 июня 1936, Горки, Московская область, СССР.</p>
+            <p>Советский писатель, классик русской литературы, поэт, прозаик, драматург, журналист, общественный деятель и публицист.</p>
+            <div class="signature">— Максим Горький, 1928</div>
+        </div>
+    </div>
+    
+    <!-- Известные произведения -->
+    <div class="works-section">
+        <div class="section-title">📚 Известные произведения</div>
+        <div class="works-grid">
+            <div class="work-card">
+                <div class="work-year">1895</div>
+                <h3>«Старуха Изергиль»</h3>
+                <p>Романтический рассказ о смысле жизни, подвиге и любви. Включает знаменитую легенду о Данко, вырвавшем своё сердце, чтобы осветить путь людям.</p>
+            </div>
+            <div class="work-card">
+                <div class="work-year">1901</div>
+                <h3>«Песня о Буревестнике»</h3>
+                <p>Революционная поэма в прозе, ставшая символом надвигающейся бури перемен.</p>
+            </div>
+            <div class="work-card">
+                <div class="work-year">1902</div>
+                <h3>«На дне»</h3>
+                <p>Социально-философская драма о жизни обитателей ночлежки. Спор о правде и лжи, сострадании и уважении — центральная тема пьесы.</p>
+            </div>
+            <div class="work-card">
+                <div class="work-year">1913—1916</div>
+                <h3>«Детство»</h3>
+                <p>Первая часть автобиографической трилогии. Яркое и пронзительное описание детских лет.</p>
+            </div>
+            <div class="work-card">
+                <div class="work-year">1915</div>
+                <h3>«В людях»</h3>
+                <p>Вторая часть автобиографической трилогии. Повествование о юности, странствиях и познании жизни.</p>
+            </div>
+            <div class="work-card">
+                <div class="work-year">1923</div>
+                <h3>«Мои университеты»</h3>
+                <p>Третья часть трилогии. Рассказ о «жизненных университетах».</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Хронология жизни -->
+    <div class="timeline-section">
+        <div class="section-title">📅 Жизненный путь</div>
+        <div class="timeline-grid">
+            <div class="timeline-item"><div class="timeline-year">1868</div><div class="timeline-content"><h4>Рождение</h4><p>Родился в Нижнем Новгороде.</p></div></div>
+            <div class="timeline-item"><div class="timeline-year">1892</div><div class="timeline-content"><h4>Первый рассказ</h4><p>«Макар Чудра» под псевдонимом Максим Горький.</p></div></div>
+            <div class="timeline-item"><div class="timeline-year">1898</div><div class="timeline-content"><h4>Признание</h4><p>Выход двухтомника «Очерки и рассказы».</p></div></div>
+            <div class="timeline-item"><div class="timeline-year">1902</div><div class="timeline-content"><h4>Театральный триумф</h4><p>Постановка пьесы «На дне» в МХТ.</p></div></div>
+            <div class="timeline-item"><div class="timeline-year">1936</div><div class="timeline-content"><h4>Уход</h4><p>Умер в Горках под Москвой.</p></div></div>
+        </div>
+    </div>
+    
+    <!-- Цитаты -->
+    <div class="quotes-section">
+        <div class="quotes-title">✍️ Великие цитаты</div>
+        <div class="quote-card"><div class="quote-text">«Человек — это звучит гордо!»</div><div class="quote-author">— Сатин, «На дне»</div></div>
+        <div class="quote-card"><div class="quote-text">«В жизни всегда есть место подвигам»</div><div class="quote-author">— «Старуха Изергиль»</div></div>
+        <div class="quote-card"><div class="quote-text">«Ложь — религия рабов и хозяев... Правда — бог свободного человека!»</div><div class="quote-author">— Сатин, «На дне»</div></div>
+    </div>
+    
+    <!-- Наследие -->
+    <div class="legacy-section">
+        <h2>🏆 Наследие и память</h2>
+        <div class="legacy-grid">
+            <div class="legacy-item"><div class="legacy-icon">🏛️</div><h3>Литературный институт</h3><p>Имя Горького в Москве.</p></div>
+            <div class="legacy-item"><div class="legacy-icon">🏙️</div><h3>Нижний Новгород</h3><p>С 1932 по 1990 год носил имя Горького.</p></div>
+            <div class="legacy-item"><div class="legacy-icon">🎭</div><h3>МХАТ имени Горького</h3><p>Московский Художественный театр.</p></div>
+        </div>
+    </div>
+    <div class="nav-buttons">
+        <a href="pages/main.html" class="transition-btn">
+            <span>🎭</span> Перейти к анализу пьесы «На дне»
+            <span>→</span>
+        </a>
+    </div> 
+
+<!-- Модальное окно  -->
+<div class="info-modal-overlay" id="infoModal">
+    <div class="info-modal">
+        <p>Хасанов Данила Ильдарович<br>студент 1ИС2<br>для экзамена по литературе</p>
+        <hr>
+        <div class="year-badge">2026</div>
+        <br>
+        <button id="closeInfoModalBtn">Закрыть</button>
+    </div>
+</div>
+
+</div>
+
+<script>
+    // Исправление модального окна: автоматический показ при загрузке и закрытие по кнопке / оверлею
+    const modalOverlay = document.getElementById('infoModal');
+    const closeBtn = document.getElementById('closeInfoModalBtn');
+
+    // Функция открытия модалки
+    function openModal() {
+        if (modalOverlay) {
+            modalOverlay.classList.add('active');
+            // Блокируем прокрутку body, чтобы не скроллился фон
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // Функция закрытия модалки
+    function closeModal() {
+        if (modalOverlay) {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // восстанавливаем прокрутку
+        }
+    }
+
+    // Открываем модальное окно при загрузке страницы
+    window.addEventListener('DOMContentLoaded', () => {
+        openModal();
+    });
+
+    // Закрытие по кнопке "Закрыть"
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+
+    // Закрытие по клику на оверлей (тёмный фон)
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+            // Если клик именно по оверлею (а не по внутреннему контенту модалки)
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    }
+
+    // Плавное появление элементов
+    const fadeElements = document.querySelectorAll('.work-card, .timeline-item, .quote-card, .legacy-item');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    fadeElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
